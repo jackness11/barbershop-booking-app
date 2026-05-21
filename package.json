@@ -12,7 +12,9 @@
     "format:check": "prettier --check .",
     "typecheck": "tsc --noEmit",
     "theme:gen": "node scripts/generate-theme.mjs",
-    "db:types": "supabase gen types typescript --local > src/types/database.types.ts"
+    "db:types": "supabase gen types typescript --linked > src/types/database.types.ts",
+    "db:push": "supabase db push",
+    "db:diff": "supabase db diff"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",
@@ -36,6 +38,7 @@
     "eslint-config-prettier": "^10.0.0",
     "prettier": "^3.8.3",
     "prettier-plugin-tailwindcss": "^0.8.0",
+    "supabase": "^2.101.0",
     "tailwindcss": "^4.3.0",
     "typescript": "^6.0.3"
   },
