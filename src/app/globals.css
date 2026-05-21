@@ -1,0 +1,246 @@
+@import "tailwindcss";
+
+/* ============================================================
+   BARBERSHOP BOOKING APP — TAILWIND v4 THEME
+   Cada token genera sus utilidades automáticamente:
+   --color-accent → bg-accent / text-accent / border-accent
+   ============================================================ */
+
+@theme {
+
+  /* ----------------------------------------------------------
+     COLORES SEMÁNTICOS
+     Reemplazá los hex cuando tengas la paleta del cliente.
+     ---------------------------------------------------------- */
+
+  /* Acento — botones, highlights, CTA */
+  --color-accent:          #c98b12;
+  --color-accent-hover:    #e4a827;
+  --color-accent-muted:    #f3d68a;
+  --color-accent-subtle:   #fdf8ee;
+
+  /* Superficies — fondos de página, tarjetas, etc. */
+  --color-background:      #0a0908;
+  --color-surface:         #1c1a18;
+  --color-surface-raised:  #2a2724;
+  --color-surface-overlay: #3a3633;
+
+  /* Bordes */
+  --color-border:          #3a3633;
+  --color-border-subtle:   #2a2724;
+  --color-border-strong:   #524d4a;
+
+  /* Texto */
+  --color-text-primary:    #f4f3f1;
+  --color-text-secondary:  #a09995;
+  --color-text-muted:      #736c68;
+  --color-text-inverse:    #0a0908;
+  --color-text-accent:     #e4a827;
+
+  /* Estados semánticos */
+  --color-success:         #4caf7d;
+  --color-success-bg:      #0d2b1a;
+  --color-error:           #e05252;
+  --color-error-bg:        #2b0d0d;
+  --color-warning:         #f0a500;
+  --color-warning-bg:      #2b1f00;
+  --color-info:            #3b82f6;
+  --color-info-bg:         #0d1a2b;
+
+  /* Turno — estados específicos del negocio */
+  --color-status-pending:    #f0a500;
+  --color-status-confirmed:  #4caf7d;
+  --color-status-cancelled:  #e05252;
+  --color-status-completed:  #3b82f6;
+
+  /* ----------------------------------------------------------
+     TIPOGRAFÍA
+     ---------------------------------------------------------- */
+
+  /* --font-inter y --font-playfair los inyecta next/font desde RootLayout. */
+  --font-sans:    var(--font-inter), 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-playfair), 'Playfair Display', Georgia, serif;
+  --font-mono:    ui-monospace, monospace;
+
+  /* ----------------------------------------------------------
+     BORDER RADIUS
+     ---------------------------------------------------------- */
+
+  --radius-sm:   0.25rem;
+  --radius-md:   0.5rem;
+  --radius-lg:   0.75rem;
+  --radius-xl:   1rem;
+  --radius-2xl:  1.5rem;
+  --radius-full: 9999px;
+
+  /* ----------------------------------------------------------
+     SOMBRAS
+     ---------------------------------------------------------- */
+
+  --shadow-sm:  0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-md:  0 4px 6px -1px rgb(0 0 0 / 0.4);
+  --shadow-lg:  0 10px 15px -3px rgb(0 0 0 / 0.5);
+  --shadow-accent: 0 4px 20px -2px rgb(201 139 18 / 0.3);
+
+  /* ----------------------------------------------------------
+     TRANSICIONES
+     ---------------------------------------------------------- */
+
+  --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast:   150ms;
+  --duration-base:   200ms;
+  --duration-slow:   300ms;
+
+}
+
+/* ============================================================
+   ESTILOS BASE
+   ============================================================ */
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--color-text-primary);
+  }
+
+  a {
+    color: var(--color-text-accent);
+    text-decoration: none;
+    transition: color var(--duration-base) var(--ease-default);
+  }
+
+  a:hover { color: var(--color-accent-hover); }
+
+  img, video { max-width: 100%; height: auto; display: block; }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-text-inverse);
+  }
+}
+
+/* ============================================================
+   UTILIDADES CUSTOM
+   ============================================================ */
+
+@utility container-app {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 1rem;
+
+  @media (width >= 640px)  { padding-inline: 1.5rem; }
+  @media (width >= 1024px) { padding-inline: 2rem; }
+}
+
+@utility btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--color-accent);
+  color: var(--color-text-inverse);
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.025em;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--duration-base) var(--ease-default),
+              transform var(--duration-fast) var(--ease-default);
+
+  &:hover {
+    background-color: var(--color-accent-hover);
+    transform: translateY(-1px);
+  }
+  &:active { transform: translateY(0); }
+}
+
+@utility btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: transparent;
+  color: var(--color-accent);
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-accent);
+  cursor: pointer;
+  transition: background-color var(--duration-base) var(--ease-default),
+              color var(--duration-base) var(--ease-default);
+
+  &:hover {
+    background-color: var(--color-accent);
+    color: var(--color-text-inverse);
+  }
+}
+
+@utility card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+}
+
+@utility section-padding {
+  padding-block: 4rem;
+  @media (width >= 1024px) { padding-block: 6rem; }
+}
+
+@utility badge-status-pending {
+  background-color: var(--color-warning-bg);
+  color: var(--color-warning);
+  border: 1px solid var(--color-warning);
+  border-radius: var(--radius-full);
+  padding: 0.125rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+@utility badge-status-confirmed {
+  background-color: var(--color-success-bg);
+  color: var(--color-success);
+  border: 1px solid var(--color-success);
+  border-radius: var(--radius-full);
+  padding: 0.125rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+@utility badge-status-cancelled {
+  background-color: var(--color-error-bg);
+  color: var(--color-error);
+  border: 1px solid var(--color-error);
+  border-radius: var(--radius-full);
+  padding: 0.125rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+@utility badge-status-completed {
+  background-color: var(--color-info-bg);
+  color: var(--color-info);
+  border: 1px solid var(--color-info);
+  border-radius: var(--radius-full);
+  padding: 0.125rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
