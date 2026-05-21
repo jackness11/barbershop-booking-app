@@ -1,0 +1,9 @@
+# pnpm 11+ settings (movidas desde el campo "pnpm" de package.json).
+# https://pnpm.io/settings
+#
+# Build scripts que tienen permiso para correr durante install:
+# - sharp: image optimizer que usa Next/Image.
+# - unrs-resolver: resolver nativo usado por ESLint/TS.
+allowBuilds:
+  sharp: true
+  unrs-resolver: true
