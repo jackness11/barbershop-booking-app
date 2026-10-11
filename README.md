@@ -43,6 +43,8 @@ Argentina.
 
 ## Requisitos
 
+> Guía paso a paso (Windows) con problemas comunes: [docs/INSTALACION.md](docs/INSTALACION.md).
+
 - **Git**
 - **Node 24 LTS** — la versión está en `.nvmrc` (`nvm use` / `fnm use`; en Windows,
   [nvm-windows](https://github.com/coreybutler/nvm-windows)).
