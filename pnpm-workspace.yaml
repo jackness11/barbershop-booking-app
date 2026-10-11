@@ -4,6 +4,8 @@
 # Build scripts que tienen permiso para correr durante install:
 # - sharp: image optimizer que usa Next/Image.
 # - unrs-resolver: resolver nativo usado por ESLint/TS.
+# - supabase: descarga el binario de la Supabase CLI (devDependency).
 allowBuilds:
   sharp: true
   unrs-resolver: true
+  supabase: true

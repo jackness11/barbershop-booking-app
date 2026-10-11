@@ -1,6 +1,6 @@
 /**
  * Refresh de sesión Supabase + guard de rutas admin.
- * Se invoca desde src/middleware.ts en cada request matcheado.
+ * Se invoca desde src/proxy.ts en cada request matcheado.
  */
 import { createServerClient } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
@@ -11,7 +11,7 @@ export async function updateSession(request: NextRequest) {
 
   const supabase = createServerClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
     {
       cookies: {
         getAll() {
@@ -28,10 +28,11 @@ export async function updateSession(request: NextRequest) {
     },
   );
 
-  // IMPORTANTE: getUser() (no getSession()) revalida el JWT contra Supabase.
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  // IMPORTANTE: no meter código entre createServerClient y getClaims().
+  // getClaims() valida la firma del JWT (nunca usar getSession() en el server)
+  // y de paso refresca el token vencido; sacarlo desloguea usuarios al azar.
+  const { data } = await supabase.auth.getClaims();
+  const user = data?.claims;
 
   const pathname = request.nextUrl.pathname;
   const isAdminRoute = pathname.startsWith('/admin');
