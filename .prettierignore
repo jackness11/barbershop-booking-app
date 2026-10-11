@@ -1,0 +1,4 @@
+# Prettier ya ignora lo que está en .gitignore; esto suma lo versionado
+# que no queremos formatear.
+pnpm-lock.yaml
+src/types/database.types.ts

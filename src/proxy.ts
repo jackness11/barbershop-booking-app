@@ -1,7 +1,8 @@
+// Next 16 renombró `middleware` → `proxy` (mismo comportamiento, corre antes de cada request).
 import { type NextRequest } from 'next/server';
-import { updateSession } from '@/lib/supabase/middleware';
+import { updateSession } from '@/lib/supabase/proxy';
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   return await updateSession(request);
 }
 
