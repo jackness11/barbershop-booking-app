@@ -46,8 +46,9 @@ Argentina.
 - **Git**
 - **Node 24 LTS** — la versión está en `.nvmrc` (`nvm use` / `fnm use`; en Windows,
   [nvm-windows](https://github.com/coreybutler/nvm-windows)).
-- **pnpm 11** — viene con Node vía Corepack: `corepack enable` (toma la versión exacta de
-  `package.json`).
+- **pnpm 11** — `npm install -g pnpm@11` (una vez por máquina). Dentro del proyecto pnpm cambia
+  solo a la versión exacta de `package.json`. No uses `corepack enable`: el Corepack que trae Node
+  22/24 no puede arrancar pnpm 12 y falla con `Cannot find module ...pnpm.cjs`.
 - **Docker Desktop** — sólo si querés correr Supabase local (recomendado). Si no, usá un proyecto
   Supabase cloud de desarrollo.
 - **VS Code** — al abrir el repo te sugiere las extensiones (ESLint, Prettier, Tailwind, Supabase).
@@ -58,7 +59,6 @@ Argentina.
 ```bash
 git clone https://github.com/jackness11/barbershop-booking-app.git
 cd barbershop-booking-app
-corepack enable
 pnpm install
 cp .env.example .env.local
 ```
