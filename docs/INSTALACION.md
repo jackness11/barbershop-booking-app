@@ -142,8 +142,13 @@ En `gh auth login` elegí: _GitHub.com_ → _HTTPS_ → _Login with a web browse
 
 ## Bajar el proyecto y levantarlo
 
+> **No clones dentro de Documentos ni del Escritorio.** Si están sincronizados con OneDrive o
+> protegidos por Windows Defender, `git clone` falla (`could not create work tree dir`) y OneDrive
+> se traba sincronizando `node_modules`. Usá una carpeta propia, como `proyectos`.
+
 ```powershell
-cd $HOME\Documents
+mkdir $HOME\proyectos
+cd $HOME\proyectos
 git clone https://github.com/jackness11/barbershop-booking-app.git
 cd barbershop-booking-app
 pnpm install
@@ -180,6 +185,24 @@ docker -v       # solo si instalaste Docker
 ---
 
 ## Problemas comunes
+
+**`git` no se reconoce... (pero Git está instalado)**
+Git no quedó en el PATH. En una PowerShell **normal** (no como administrador: si no, puede quedar
+configurado para otro usuario de Windows):
+
+```powershell
+[Environment]::SetEnvironmentVariable("Path", [Environment]::GetEnvironmentVariable("Path","User") + ";C:\Program Files\Git\cmd", "User")
+```
+
+Cerrá la terminal, abrí una nueva y probá `git --version`.
+
+**`fatal: could not create work tree dir ...`**
+Estás clonando dentro de Documentos o del Escritorio (OneDrive / Windows Defender lo bloquean).
+Cloná en `$HOME\proyectos` como en [Bajar el proyecto](#bajar-el-proyecto-y-levantarlo).
+
+**Lo instalé como administrador y en la terminal normal no anda**
+Si el administrador es otro usuario de Windows, lo instalado con `npm install -g` queda para ese
+usuario. Repetí el comando en la terminal normal.
 
 **`pnpm` no se reconoce como nombre de un cmdlet...**
 Cerrá **todas** las terminales (y VS Code) y abrí una nueva. Si sigue, reinstalá:
